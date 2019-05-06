@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run rljohnson4444/docker-react yarn test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2" # Elastic beanstalk regoin
+  app: "docker-react" # Elastic beanstalk app
+  env: "DockerReact-env" # Elastic beanstalk env
+  bucket_name: "elasticbeanstalk-us-west-2-392616981569" # S3 bucket connect to app
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
